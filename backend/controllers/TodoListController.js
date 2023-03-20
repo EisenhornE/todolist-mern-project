@@ -33,6 +33,21 @@ const getTask = async (req, res) => {
 const createTask = async (req, res) => {
     const {title, description, duedate, status} = req.body
 
+    let emptyFields =  []
+
+    if(!title){
+        emptyFields.push('title')
+    }
+    if(!description){
+        emptyFields.push('description')
+    }
+    if(!duedate){
+        emptyFields.push('duedate')
+    }
+    if(emptyFields.length > 0 ){
+        return res.status(400).json({ error: 'Please fill in all the fields', emptyFields})
+    }
+
     // add doc to db
     try{
         const todolist = await Todo.create({title, description, duedate, status})
