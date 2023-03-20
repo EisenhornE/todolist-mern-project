@@ -12,6 +12,10 @@ export const listReducer = (state, action) => {
             return{
                 todoList: [action.payload, ...state.todoList]
             }
+        case 'DELETE_TASK':
+            return{
+                todoList: state.todoList.filter((w) => w._id !== action.payload)
+            }
         default:
             return state
     }
