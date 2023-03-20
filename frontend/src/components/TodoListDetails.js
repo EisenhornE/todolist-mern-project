@@ -1,5 +1,8 @@
 import { useListContext } from "../hooks/useTodoListContext"
 
+// date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 const TodoListDetails = ({ todoList }) => {
     const { dispatch } = useListContext()
 
@@ -19,8 +22,8 @@ const TodoListDetails = ({ todoList }) => {
             <h4>{todoList.title}</h4>
             <p><strong>Description: </strong>{todoList.description}</p>
             <p><strong>Due By:  </strong>{todoList.duedate}</p>
-            <p>{todoList.createdAt}</p>
-            <span onClick={handleClick}>Delete</span>
+            <p>{formatDistanceToNow(new Date(todoList.createdAt), { addSuffix: true})}</p>
+            <span className="material-symbols-outlined" onClick={handleClick}>Delete</span>
         </div>
     )
 }
